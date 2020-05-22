@@ -7,4 +7,5 @@ A patched version of dmenu.
 ## Patches
 
 * lineheight-4.9 (https://tools.suckless.org/dmenu/patches/line-height/)
+* numbers-4.9 (https://tools.suckless.org/dmenu/patches/numbers/)
 

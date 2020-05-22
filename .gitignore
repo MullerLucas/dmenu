@@ -1,0 +1,5 @@
+source/dmenu
+source/stest
+*.o
+
+

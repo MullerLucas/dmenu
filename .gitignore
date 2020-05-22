@@ -1,5 +1,6 @@
 source/dmenu
 source/stest
+source/config.h
 *.o
 
 

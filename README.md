@@ -8,4 +8,5 @@ A patched version of dmenu.
 
 * lineheight-4.9 (https://tools.suckless.org/dmenu/patches/line-height/)
 * numbers-4.9 (https://tools.suckless.org/dmenu/patches/numbers/)
+* highlight-4.9 (https://tools.suckless.org/dmenu/patches/highlight/)
 

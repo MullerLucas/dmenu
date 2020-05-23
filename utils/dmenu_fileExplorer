@@ -1,0 +1,30 @@
+#!/bin/bash
+
+[ $# -ne 1 ] && exit 1
+
+path=$1
+oldPath=path
+
+while true ;
+do
+	selection=$(ls $path | dmenu)
+
+	# Close application
+	[ ${#selection} -eq 0 ] || [ $selection == "!exit" ] && exit 0
+	# Open directory
+	[ $selection == "!cd" ] && (alacritty --working-directory=$path &) && break
+	# Open previous directory
+	[ $selection == "!.." ] && path=$oldPath && continue
+
+	oldPath=$path
+	path+="/$selection"
+
+	# TODO: If path points to a file, open the file
+	# [ -f $path ] && (xdg-open $path &) && break
+	# [ -f $path ] && (alacritty -e "nvim $path") && break
+	[ -f $path ] && (alacritty --working-directory=$oldPath &) && break
+	# If the path is invalid, use the old path
+	[ ! -d $path ] && path=$oldPath
+done
+
+exit 0

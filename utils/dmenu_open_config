@@ -1,0 +1,32 @@
+#!/bin/sh
+
+prompt="config:"
+
+wm="bspwm"
+wmPath=".config/bspwm/bspwmrc"
+
+hkd="sxhdk"
+hkdPath=".config/sxhkd/sxhkdrc"
+
+term="alacritty"
+termPath=".config/alacritty/alacritty.yml"
+
+
+
+selection=$(echo -e "${wm}\n${hkd}\n${term}" | dmenu -p $prompt)
+
+[ -z ${selection} ] && exit 1
+
+case $selection in
+	$wm)
+		path=$wmPath ;;
+	$hkd)
+		path=$hkdPath ;;
+	$term)
+		path=$termPath ;;
+esac
+
+alacritty --hold -e nvim ~/$path
+
+
+

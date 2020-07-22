@@ -10,4 +10,5 @@ A patched version of dmenu.
 * numbers-4.9 (https://tools.suckless.org/dmenu/patches/numbers/)
 * highlight-4.9 (https://tools.suckless.org/dmenu/patches/highlight/)
 * fuzzymatch-4.9 (https://tools.suckless.org/dmenu/patches/fuzzymatch/)
+* xresources-20200302-db6093f (https://tools.suckless.org/dmenu/patches/xresources/)
 

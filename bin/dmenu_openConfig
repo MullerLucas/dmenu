@@ -1,32 +1,51 @@
 #!/bin/sh
 
+# =========================================================
+# Setup
+# =========================================================
 prompt="config:"
 
-wm="bspwm"
-wmPath=".config/bspwm/bspwmrc"
+declare -A configPaths
 
-hkd="sxhdk"
-hkdPath=".config/sxhkd/sxhkdrc"
+configPaths["alacritty"]=".config/alacritty/alacritty.yml"
+configPaths["alacritty_in"]=".config/alacritty/alacritty.yml.in"
 
-term="alacritty"
-termPath=".config/alacritty/alacritty.yml"
+configPaths["awesome"]=".config/awesome/rc.lua"
+configPaths["awesome_vars"]=".config/awesome/variables.lua"
+configPaths["awesome_keys"]=".config/awesome/globalKeyBinds.lua"
+configPaths["awesome_rules"]=".config/awesome/rules.lua"
+configPaths["awesome_theme"]=".config/awesome/themes/default/theme.lua"
 
+configPaths["bspwm"]=".config/bspwm/bspwmrc"
 
+configPaths["mangohud"]=".config/MangoHud/MangoHud.conf"
 
-selection=$(echo -e "${wm}\n${hkd}\n${term}" | dmenu -p $prompt)
+configPaths["newsboat"]=".newsboat/config"
 
+configPaths["newsboat_urls"]=".newsboat/urls"
+
+configPaths["sxhdk"]=".config/sxhkd/sxhkdrc"
+
+configPaths["xresources"]=".config/xresources/Xresources"
+configPaths["xresources_colors"]=".config/xresources/colorSchemes/faint.xres"
+
+configPaths["zshrc"]=".zshrc"
+configPaths["zshrc_aliases"]=".config/zsh/aliases.zsh"
+configPaths["zshrc_antigen"]=".config/zsh/antigen.zsh"
+
+# =========================================================
+# Run dmenu
+# =========================================================
+selection=$(printf '%s\n' ${!configPaths[@]} | dmenu -i -m 0 -p $prompt)
+
+# Open selection
 [ -z ${selection} ] && exit 1
 
-case $selection in
-	$wm)
-		path=$wmPath ;;
-	$hkd)
-		path=$hkdPath ;;
-	$term)
-		path=$termPath ;;
-esac
+# Open in nvim
+# alacritty --hold -e nvim ~/${configPaths[$selection]}
 
-alacritty --hold -e nvim ~/$path
+# Open in Emacs
+emacs ~/${configPaths[$selection]}
 
 
 

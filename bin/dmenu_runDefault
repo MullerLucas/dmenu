@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# -i: case insentitive
+# -m: monitor 0
+dmenu_path | dmenu -i -m 0"$@" | ${SHELL:-"/bin/sh"} &
+
+
+

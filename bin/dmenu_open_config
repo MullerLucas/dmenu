@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# =========================================================
+# Setup
+# =========================================================
+prompt="CONFIG:"
+
+declare -A config_paths
+
+config_paths["alacritty"]="$XDG_CONFIG_HOME/alacritty"
+config_paths["awesomewm"]="$XDG_CONFIG_HOME/awesome"
+config_paths["x11"]="$XDG_CONFIG_HOME/x11"
+config_paths["xresources"]="$XDG_CONFIG_HOME/x11/resources"
+config_paths["zsh"]="$XDG_CONFIG_HOME/zsh"
+config_paths["nvim"]="$XDG_CONFIG_HOME/nvim"
+
+
+
+# =========================================================
+# Run dmenu
+# =========================================================
+
+selection=$(printf '%s\n' ${!config_paths[@]} | dmenu -i -m 0 -p $prompt)
+
+# Open selection
+[ -z ${selection} ] && exit 1
+
+echo "Selection $selection"
+
+alacritty --working-directory  "${config_paths[$selection]}"
+# alacritty --hold -e nvim ~/${config_paths[$selection]}

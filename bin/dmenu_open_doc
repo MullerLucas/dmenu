@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# =========================================================
+# Setup
+# =========================================================
+prompt="DOCS:"
+
+declare -A links
+
+links["awesomewm"]="https://awesomewm.org/doc/api/"
+
+
+
+# =========================================================
+# Run dmenu
+# =========================================================
+
+sel=$(printf '%s\n' ${!links[@]} | dmenu -i -m 0 -p $prompt)
+
+# Open selection
+[ -z ${sel} ] && exit 1
+
+
+echo "Test ${links[$sel]}"
+
+$BROWSER "${links[$sel]}"
